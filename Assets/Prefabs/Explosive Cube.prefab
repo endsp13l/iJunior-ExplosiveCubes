@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 642676691137483688}
   - component: {fileID: 6725749995862166178}
   - component: {fileID: 8609457985394146503}
+  - component: {fileID: -6128237159635650309}
   m_Layer: 0
   m_Name: Explosive Cube
   m_TagString: Untagged
@@ -159,3 +160,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a768bef9c00c7104aa018790c8fb5cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hueMin: 0
+  _hueMax: 1
+  _saturationMin: 0.5
+  _saturationMax: 1
+  _valueMin: 0.5
+  _valueMax: 1
+--- !u!114 &-6128237159635650309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343905221402361812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae7f1469a9cacf439a73e7ead6f085a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubePrefab: {fileID: 8343905221402361812}
+  _minCubesCount: 2
+  _maxCubesCount: 6
