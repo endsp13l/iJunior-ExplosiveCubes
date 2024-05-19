@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class ColorSetter : MonoBehaviour
 {
     [SerializeField] private float _hueMin = 0f;

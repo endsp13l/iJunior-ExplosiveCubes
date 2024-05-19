@@ -6,7 +6,7 @@ public class DivisionSolver : MonoBehaviour
 {
     private const int TotalPercentsCount = 100;
 
-    [SerializeField]private int _divisionChanceInPercents = 100;
+    private int _divisionChanceInPercents = 100;
     private Random _random = new Random();
 
     public event Action<int, Vector3> Divided;
@@ -15,7 +15,7 @@ public class DivisionSolver : MonoBehaviour
     {
         TryDivide();
     }
-    
+
     public void SetDivisionChance(int divisionChanceInPercents)
     {
         _divisionChanceInPercents = divisionChanceInPercents;
