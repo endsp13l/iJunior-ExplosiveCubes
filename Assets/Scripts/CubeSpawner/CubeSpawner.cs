@@ -1,32 +1,84 @@
 using UnityEngine;
 using Random = System.Random;
 
+[RequireComponent(typeof(ColorSetter))]
 public class CubeSpawner : MonoBehaviour
 {
+    private const int TotalPercentsCount = 100;
+
     [SerializeField] private ExplosiveCube _cubePrefab;
-    
+
     [SerializeField] private int _minCubesCount = 2;
     [SerializeField] private int _maxCubesCount = 6;
 
     private float _scaleMultiplier = 0.5f;
-    private float _divisionChanceMultiplier = 0.5f;
+    private float _spawnChanceMultiplier = 0.5f;
+
+    private Vector3 _scale = Vector3.one;
+    private int _spawnChance = 100;
 
     private Random _random = new Random();
+    private ColorSetter _colorSetter;
 
-    public void Spawn(Transform targetTransform, int divisionChance)
+    private void Awake()
     {
-        ExplosiveCube currentCube;
+        _colorSetter = GetComponent<ColorSetter>();
 
-        int count = GetRandomCount();
-        Vector3 scale = targetTransform.localScale * _scaleMultiplier;
-        divisionChance = (int)(divisionChance * _divisionChanceMultiplier);
-
-        for (int i = 0; i < count; i++)
-        {
-            currentCube = Instantiate(_cubePrefab, targetTransform.position, Quaternion.identity);
-            currentCube.Initialize(divisionChance, scale);
-        }
+        InitializeScene();
     }
 
-    private int GetRandomCount() => _random.Next(_minCubesCount, _maxCubesCount);
+    private void TrySpawn(Transform targetTransform, int spawnChance)
+    {
+        if (spawnChance <= 0)
+            return;
+
+        if (GetRandomChance() <= spawnChance)
+            Spawn(targetTransform, spawnChance);
+        else
+            ExplodeCube(targetTransform);
+    }
+
+    public void Spawn(Transform targetTransform, int spawnChance)
+    {
+        int count = GetRandomCubesCount();
+        Vector3 scale = targetTransform.localScale;
+        Vector3 position = targetTransform.position;
+
+        ApplyModifier(scale, spawnChance);
+
+        for (int i = 0; i < count; i++)
+            CreateCube(position, _scale, _spawnChance);
+    }
+
+    private void ApplyModifier(Vector3 scale, int spawnChance)
+    {
+        _scale = scale * _scaleMultiplier;
+        _spawnChance = (int)(spawnChance * _spawnChanceMultiplier);
+    }
+
+    private void CreateCube(Vector3 position, Vector3 scale, int spawnChance)
+    {
+        ExplosiveCube cube = Instantiate(_cubePrefab, position, Quaternion.identity);
+
+        cube.Initialize(spawnChance, scale, _colorSetter.GetRandomColor());
+        cube.Clicked += TrySpawn;
+    }
+
+    private void ExplodeCube(Transform targetTransform)
+    {
+        ExplosiveCube cube = targetTransform.GetComponent<ExplosiveCube>();
+
+        cube.Clicked -= TrySpawn;
+        cube.Explode();
+    }
+
+
+    private void InitializeScene()
+    {
+        for (int i = 0; i < GetRandomCubesCount(); i++)
+            CreateCube(transform.position, _scale, _spawnChance);
+    }
+
+    private int GetRandomCubesCount() => _random.Next(_minCubesCount, _maxCubesCount);
+    private int GetRandomChance() => _random.Next(0, TotalPercentsCount);
 }

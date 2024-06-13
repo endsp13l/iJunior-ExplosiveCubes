@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 2507702760399601966}
   - component: {fileID: 3480286418122650303}
   - component: {fileID: 642676691137483688}
-  - component: {fileID: 8609457985394146503}
   - component: {fileID: 3547349067713735379}
-  m_Layer: 0
+  - component: {fileID: 5020490609149817430}
+  - component: {fileID: 4455269845694710224}
+  m_Layer: 3
   m_Name: Explosive Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &347618845050280237
 MeshFilter:
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 868a3993d47d00841bf220959e15d15d, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,24 +136,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8609457985394146503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343905221402361812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a768bef9c00c7104aa018790c8fb5cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hueMin: 0
-  _hueMax: 1
-  _saturationMin: 0.5
-  _saturationMax: 1
-  _valueMin: 0.5
-  _valueMax: 1
 --- !u!114 &3547349067713735379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,5 +148,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236942280979737498c712ab68deeb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1210004765903081388, guid: f300e4c498307934fbc4ecff0a8b1eb1, type: 3}
-  _divisionChance: 100
+--- !u!114 &5020490609149817430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343905221402361812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f61ca7485921554481880b6808bc3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionForce: 100
+  _explosionRadius: 1
+--- !u!114 &4455269845694710224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343905221402361812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6ace983bb84ce468b4963155c6040d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionEffect: {fileID: 6146545414153545492, guid: 61753401622c2a947a30e2147430e97d, type: 3}
+  _explosionEffectLifetime: 3

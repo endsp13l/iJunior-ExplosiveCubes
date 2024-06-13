@@ -1,43 +1,42 @@
+using System;
 using UnityEngine;
-using Random = System.Random;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(Explosion))]
 public class ExplosiveCube : MonoBehaviour
 {
-    private const int TotalPercentsCount = 100;
+    private Renderer _renderer;
+    private Explosion _explosion;
 
-    [SerializeField] private CubeSpawner _spawner;
+    public int DivisionChance { get; private set; }
 
-    [SerializeField] private float _explosionForce = 20f;
-    [SerializeField] private float _explosionRadius = 1f;
+    public event Action<Transform, int> Clicked;
+    public event Action<Transform> Exploded;
 
-    private int _divisionChance = 100;
-    private Random _random = new Random();
-    private Rigidbody _rigidbody;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _renderer = GetComponent<Renderer>();
+        _explosion = GetComponent<Explosion>();
     }
 
-    private void OnMouseDown() => TryDivide();
-
-    public void Initialize(int divisionChance, Vector3 scale)
+    private void OnMouseDown()
     {
-        _divisionChance = divisionChance;
-        transform.localScale = scale;
-    }
-
-    private void TryDivide()
-    {
-        int divisionChance = _random.Next(0, TotalPercentsCount);
-
-        if (divisionChance <= _divisionChance)
-        {
-            _spawner.Spawn(transform, _divisionChance);
-            _rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
-        }
-
+        Clicked?.Invoke(transform, DivisionChance);
         Destroy(gameObject);
+    }
+
+    public void Initialize(int divisionChance, Vector3 scale, Color color)
+    {
+        DivisionChance = divisionChance;
+        transform.localScale = scale;
+        _renderer.material.color = color;
+    }
+
+    public void Explode()
+    {
+        _explosion.Explode();
+        Exploded?.Invoke(transform);
     }
 }
