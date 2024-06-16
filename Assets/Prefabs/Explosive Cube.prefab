@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 3480286418122650303}
   - component: {fileID: 642676691137483688}
   - component: {fileID: 3547349067713735379}
-  - component: {fileID: 5020490609149817430}
-  - component: {fileID: 4455269845694710224}
   m_Layer: 3
   m_Name: Explosive Cube
   m_TagString: Untagged
@@ -148,31 +146,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236942280979737498c712ab68deeb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5020490609149817430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343905221402361812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f61ca7485921554481880b6808bc3c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosionForce: 100
-  _explosionRadius: 1
---- !u!114 &4455269845694710224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343905221402361812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6ace983bb84ce468b4963155c6040d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosionEffect: {fileID: 6146545414153545492, guid: 61753401622c2a947a30e2147430e97d, type: 3}
-  _explosionEffectLifetime: 3

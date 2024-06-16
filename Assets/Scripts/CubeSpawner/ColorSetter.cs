@@ -9,6 +9,6 @@ public class ColorSetter : MonoBehaviour
     [SerializeField] private float _valueMin = 0.5f;
     [SerializeField] private float _valueMax = 1f;
 
-   public Color GetRandomColor() => Random.ColorHSV(_hueMin, _hueMax,
+    public Color GetRandomColor() => Random.ColorHSV(_hueMin, _hueMax,
         _saturationMin, _saturationMax, _valueMin, _valueMax);
 }

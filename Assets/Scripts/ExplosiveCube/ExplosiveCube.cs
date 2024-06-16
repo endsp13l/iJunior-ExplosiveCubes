@@ -3,22 +3,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Renderer))]
-[RequireComponent(typeof(Explosion))]
 public class ExplosiveCube : MonoBehaviour
 {
     private Renderer _renderer;
-    private Explosion _explosion;
 
     public int DivisionChance { get; private set; }
 
     public event Action<Transform, int> Clicked;
-    public event Action<Transform> Exploded;
-
+    public event Action<ExplosiveCube> Exploded;
 
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
-        _explosion = GetComponent<Explosion>();
     }
 
     private void OnMouseDown()
@@ -34,9 +30,5 @@ public class ExplosiveCube : MonoBehaviour
         _renderer.material.color = color;
     }
 
-    public void Explode()
-    {
-        _explosion.Explode();
-        Exploded?.Invoke(transform);
-    }
+    public void Explode() => Exploded?.Invoke(this);
 }

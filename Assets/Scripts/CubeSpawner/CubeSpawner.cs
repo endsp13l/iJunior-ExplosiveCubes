@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = System.Random;
 
@@ -20,14 +21,15 @@ public class CubeSpawner : MonoBehaviour
     private Random _random = new Random();
     private ColorSetter _colorSetter;
 
+    public event Action<ExplosiveCube> CubeSpawned;
+
     private void Awake()
     {
         _colorSetter = GetComponent<ColorSetter>();
-
         InitializeScene();
     }
 
-    private void TrySpawn(Transform targetTransform, int spawnChance)
+    public void TrySpawn(Transform targetTransform, int spawnChance)
     {
         if (spawnChance <= 0)
             return;
@@ -38,7 +40,7 @@ public class CubeSpawner : MonoBehaviour
             ExplodeCube(targetTransform);
     }
 
-    public void Spawn(Transform targetTransform, int spawnChance)
+    private void Spawn(Transform targetTransform, int spawnChance)
     {
         int count = GetRandomCubesCount();
         Vector3 scale = targetTransform.localScale;
@@ -61,17 +63,14 @@ public class CubeSpawner : MonoBehaviour
         ExplosiveCube cube = Instantiate(_cubePrefab, position, Quaternion.identity);
 
         cube.Initialize(spawnChance, scale, _colorSetter.GetRandomColor());
-        cube.Clicked += TrySpawn;
+        CubeSpawned?.Invoke(cube);
     }
 
     private void ExplodeCube(Transform targetTransform)
     {
-        ExplosiveCube cube = targetTransform.GetComponent<ExplosiveCube>();
-
-        cube.Clicked -= TrySpawn;
-        cube.Explode();
+        if (targetTransform.TryGetComponent(out ExplosiveCube cube))
+            cube.Explode();
     }
-
 
     private void InitializeScene()
     {
