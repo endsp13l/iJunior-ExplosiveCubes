@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ExplosionView))]
 public class CubeExploder : MonoBehaviour
 {
-    private const string CubeLayerName = "ExplosiveCube";
-
+    [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _explosionForce = 100f;
     [SerializeField] private float _explosionRadius = 1f;
 
@@ -37,10 +36,8 @@ public class CubeExploder : MonoBehaviour
 
     private List<Rigidbody> GetCubes(Transform targetTransform)
     {
-        int layerMask = LayerMask.GetMask(CubeLayerName);
-
         Collider[] hits =
-            Physics.OverlapSphere(targetTransform.position, GetExplosionRadius(_targetScale), layerMask);
+            Physics.OverlapSphere(targetTransform.position, GetExplosionRadius(_targetScale), _layerMask);
 
         List<Rigidbody> cubes = new List<Rigidbody>();
 

@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31811b4e04c346a4b88ba42f238f53d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 8
   _explosionForce: 100
   _explosionRadius: 1
 --- !u!114 &7111158036792301688
@@ -59,5 +62,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6ace983bb84ce468b4963155c6040d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionEffect: {fileID: 74078499623404260, guid: 9790383d97594f049aecba8cf470e3b7, type: 3}
+  _explosionEffectPrefab: {fileID: 0}
   _explosionEffectLifetime: 3
